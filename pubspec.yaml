@@ -79,4 +79,9 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
-  uses-material-design: true 
+  uses-material-design: true
+  
+  assets:
+    - assets/logos/logo_primary.png
+    - assets/logos/logo_secondary.png
+    - assets/logos/app_icon.png 
