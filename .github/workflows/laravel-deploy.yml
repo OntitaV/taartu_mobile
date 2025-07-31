@@ -1,0 +1,78 @@
+name: Laravel Production Deploy
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, mysqlnd, zip, gd, curl, fileinfo
+          coverage: none
+      
+      - name: Install Composer
+        uses: ramsey/composer-install@v4
+        with:
+          composer-options: --no-dev --optimize-autoloader
+      
+      - name: Copy Environment
+        run: |
+          cp .env.example .env.production
+          echo "APP_ENV=production" >> .env.production
+          echo "APP_DEBUG=false" >> .env.production
+          echo "APP_URL=https://api.taartu.com" >> .env.production
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env.production
+          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env.production
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env.production
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env.production
+          echo "REDIS_HOST=${{ secrets.REDIS_HOST }}" >> .env.production
+          echo "MAIL_MAILER=smtp" >> .env.production
+          echo "MAIL_HOST=${{ secrets.MAIL_HOST }}" >> .env.production
+          echo "MAIL_PORT=${{ secrets.MAIL_PORT }}" >> .env.production
+          echo "MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}" >> .env.production
+          echo "MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}" >> .env.production
+          echo "MAIL_ENCRYPTION=tls" >> .env.production
+          echo "MAIL_FROM_ADDRESS=${{ secrets.MAIL_FROM_ADDRESS }}" >> .env.production
+          echo "PAYSTACK_SECRET_KEY=${{ secrets.PAYSTACK_SECRET_KEY }}" >> .env.production
+          echo "PAYSTACK_PUBLIC_KEY=${{ secrets.PAYSTACK_PUBLIC_KEY }}" >> .env.production
+      
+      - name: Deploy to Production Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: |
+            cd /var/www/taartu-api
+            git pull origin main
+            composer install --no-dev --optimize-autoloader
+            cp .env.example .env
+            php artisan key:generate
+            php artisan migrate --force
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+            sudo systemctl restart php8.2-fpm
+            sudo systemctl restart nginx
+            sudo systemctl restart supervisor
+            echo "Deployment completed successfully!"
+      
+      - name: Health Check
+        run: |
+          echo "Performing health check..."
+          curl -f https://api.taartu.com/health || exit 1
+      
+      - name: Notify Deployment
+        run: |
+          echo "Laravel API deployment completed successfully!"
+          # Add notification logic here (Slack, email, etc.) 

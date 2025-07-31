@@ -1,0 +1,123 @@
+name: Flutter Release Build
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+          channel: 'stable'
+      
+      - name: Install dependencies
+        run: flutter pub get
+      
+      - name: Analyze project source
+        run: flutter analyze --no-fatal-infos
+      
+      - name: Run tests
+        run: flutter test
+      
+      - name: Build APK
+        run: flutter build apk --release
+      
+      - name: Build App Bundle
+        run: flutter build appbundle --release
+      
+      - name: Build iOS (no codesign)
+        run: flutter build ios --release --no-codesign
+      
+      - name: Build Web
+        run: flutter build web --release
+      
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: taartu-mobile-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+      
+      - name: Upload App Bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: taartu-mobile-aab
+          path: build/app/outputs/bundle/release/app-release.aab
+      
+      - name: Upload iOS Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: taartu-mobile-ios
+          path: build/ios/iphoneos/Runner.app
+      
+      - name: Upload Web Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: taartu-mobile-web
+          path: build/web
+
+  deploy-staging:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop'
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+          channel: 'stable'
+      
+      - name: Build Web for Staging
+        run: |
+          flutter pub get
+          flutter build web --release --dart-define=ENVIRONMENT=staging
+      
+      - name: Deploy to Staging
+        run: |
+          # Deploy to staging.taartu.com
+          echo "Deploying to staging environment..."
+          # Add actual deployment commands here
+      
+      - name: Run Staging Smoke Tests
+        run: |
+          echo "Running staging smoke tests..."
+          # Add actual smoke test commands here
+
+  deploy-production:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+          channel: 'stable'
+      
+      - name: Build Web for Production
+        run: |
+          flutter pub get
+          flutter build web --release --dart-define=ENVIRONMENT=production
+      
+      - name: Deploy to Production
+        run: |
+          # Deploy to taartu.com
+          echo "Deploying to production environment..."
+          # Add actual deployment commands here
+      
+      - name: Notify Team
+        run: |
+          echo "Production deployment completed!"
+          # Add notification logic here 
