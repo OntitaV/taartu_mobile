@@ -242,56 +242,25 @@ class _ScaffoldWithNavigationBarState extends State<ScaffoldWithNavigationBar> {
         ),
         child: SafeArea(
           bottom: true,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: _items.asMap().entries.map((entry) {
-                final index = entry.key;
-                final item = entry.value;
-                final isSelected = index == _currentIndex;
-
-                return Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      if (!isSelected) {
-                        context.go(item.route);
-                      }
-                    },
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                      decoration: BoxDecoration(
-                        color: isSelected ? Colors.blue.withValues(alpha: 0.1) : Colors.transparent,
-                        borderRadius: BorderRadius.circular(1),
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            item.icon,
-                            color: isSelected ? Colors.blue : Colors.grey,
-                            size: 14,
-                          ),
-                          const SizedBox(height: 0),
-                          Text(
-                            item.label,
-                            style: TextStyle(
-                              color: isSelected ? Colors.blue : Colors.grey,
-                              fontSize: 6,
-                              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                            ),
-                            textAlign: TextAlign.center,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            currentIndex: _currentIndex,
+            onTap: (index) {
+              if (index != _currentIndex) {
+                context.go(_items[index].route);
+              }
+            },
+            selectedItemColor: Colors.blue,
+            unselectedItemColor: Colors.grey,
+            selectedFontSize: 10,
+            unselectedFontSize: 8,
+            iconSize: 18,
+            items: _items.map((item) {
+              return BottomNavigationBarItem(
+                icon: Icon(item.icon),
+                label: item.label,
+              );
+            }).toList(),
           ),
         ),
       ),
