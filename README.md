@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Taartu Mobile App
 
 **Version:** 1.0.0+100  
@@ -209,3 +210,7 @@ This project is proprietary software owned by Taartu.
 **Last Updated:** December 2024  
 **Audit Status:** ✅ Production Ready  
 **Version:** 1.0.0+100 
+=======
+# taartu_mobile
+Taartu Mobile App - Flutter marketplace for salon bookings 
+>>>>>>> e9bdb02d0c070f765d94be83a8dc7ec284d752ad
