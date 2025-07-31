@@ -9,6 +9,7 @@ class TaartuAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? backgroundColor;
   final Color? foregroundColor;
   final double? elevation;
+  final VoidCallback? onBackPressed;
 
   const TaartuAppBar({
     super.key,
@@ -19,6 +20,7 @@ class TaartuAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.foregroundColor,
     this.elevation,
+    this.onBackPressed,
   });
 
   @override
@@ -32,8 +34,13 @@ class TaartuAppBar extends StatelessWidget implements PreferredSizeWidget {
             fit: BoxFit.contain,
           ),
       actions: actions,
-      leading: leading,
-      automaticallyImplyLeading: automaticallyImplyLeading,
+      leading: leading ?? (automaticallyImplyLeading && onBackPressed != null
+        ? IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: onBackPressed,
+          )
+        : null),
+      automaticallyImplyLeading: automaticallyImplyLeading && onBackPressed == null,
       backgroundColor: backgroundColor ?? AppTheme.white,
       foregroundColor: foregroundColor ?? AppTheme.gray900,
       elevation: elevation ?? 0,

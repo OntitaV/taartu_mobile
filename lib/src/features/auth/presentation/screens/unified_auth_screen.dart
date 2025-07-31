@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taartu_mobile/src/core/theme/app_theme.dart';
+import 'package:taartu_mobile/src/shared/widgets/taartu_app_bar.dart';
 import 'package:taartu_mobile/src/shared/widgets/taartu_button.dart';
 import 'package:taartu_mobile/src/shared/widgets/taartu_input.dart';
 
@@ -55,20 +56,9 @@ class _UnifiedAuthScreenState extends State<UnifiedAuthScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.gray50,
-      appBar: AppBar(
-        backgroundColor: AppTheme.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go('/welcome'),
-        ),
-        title: Text(
-          widget.role == 'business' ? 'Business Account' : 'Client Account',
-          style: TextStyle(
-            color: AppTheme.gray900,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+      appBar: TaartuAppBar(
+        title: widget.role == 'business' ? 'Business Account' : 'Client Account',
+        onBackPressed: () => context.go('/welcome'),
       ),
       body: Column(
         children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taartu_mobile/src/core/theme/app_theme.dart';
+import 'package:taartu_mobile/src/shared/widgets/taartu_app_bar.dart';
 import 'package:taartu_mobile/src/shared/widgets/taartu_button.dart';
 import '../../../financial/offers/presentation/screens/offers_screen.dart';
 import '../../../financial/platformFee/presentation/screens/commission_rate_screen.dart';
@@ -125,7 +126,7 @@ class _BusinessDashboardState extends State<BusinessDashboard> with TickerProvid
     
     return Scaffold(
       backgroundColor: AppTheme.gray50,
-      appBar: AppBar(
+      appBar: TaartuAppBar(
         title: Text(
           'Business Dashboard',
           style: theme.textTheme.headlineSmall!.copyWith(
