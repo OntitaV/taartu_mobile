@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:taartu_mobile/src/core/theme/app_theme.dart';
 import 'package:taartu_mobile/src/shared/widgets/taartu_button.dart';
 import 'package:taartu_mobile/src/shared/widgets/taartu_app_bar.dart';
+import 'package:taartu_mobile/src/shared/widgets/taartu_drawer.dart';
 import 'package:taartu_mobile/src/core/navigation/app_router.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -42,6 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ],
       ),
+      drawer: const TaartuDrawer(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(AppTheme.spacing16),
         child: Column(
