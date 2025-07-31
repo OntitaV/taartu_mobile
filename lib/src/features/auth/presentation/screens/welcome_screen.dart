@@ -146,9 +146,9 @@ class WelcomeScreen extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        height: screenHeight * 0.12,
+        height: screenHeight * 0.08, // Reduced height
         margin: EdgeInsets.symmetric(vertical: screenHeight * 0.005),
-        padding: EdgeInsets.all(screenWidth * 0.04),
+        padding: EdgeInsets.all(screenWidth * 0.03), // Reduced padding
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
@@ -164,8 +164,8 @@ class WelcomeScreen extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              width: screenWidth * 0.12,
-              height: screenWidth * 0.12,
+              width: screenWidth * 0.08, // Reduced size
+              height: screenWidth * 0.08, // Reduced size
               decoration: BoxDecoration(
                 color: color.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
@@ -173,10 +173,10 @@ class WelcomeScreen extends StatelessWidget {
               child: Icon(
                 icon,
                 color: color,
-                size: screenWidth * 0.06,
+                size: screenWidth * 0.04, // Reduced size
               ),
             ),
-            SizedBox(width: screenWidth * 0.04),
+            SizedBox(width: screenWidth * 0.03), // Reduced spacing
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -185,19 +185,19 @@ class WelcomeScreen extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      fontSize: screenWidth * 0.04,
+                      fontSize: screenWidth * 0.035, // Reduced font size
                       fontWeight: FontWeight.bold,
                       color: AppTheme.gray900,
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.005),
+                  SizedBox(height: screenHeight * 0.003), // Reduced spacing
                   Text(
                     subtitle,
                     style: TextStyle(
-                      fontSize: screenWidth * 0.035,
+                      fontSize: screenWidth * 0.03, // Reduced font size
                       color: AppTheme.gray600,
                     ),
-                    maxLines: 2,
+                    maxLines: 1, // Reduced to 1 line
                     overflow: TextOverflow.ellipsis,
                   ),
                 ],
@@ -206,7 +206,7 @@ class WelcomeScreen extends StatelessWidget {
             Icon(
               Icons.arrow_forward_ios,
               color: AppTheme.gray400,
-              size: screenWidth * 0.04,
+              size: screenWidth * 0.035, // Reduced size
             ),
           ],
         ),
