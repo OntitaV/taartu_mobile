@@ -34,11 +34,17 @@ The logo integration is **structurally complete** but requires actual image file
 - **Size**: Recommended 200x80px or similar aspect ratio
 
 ### **App Icon (`app_icon.png`)**
-- **Description**: White "t" letter in teal rounded square
-- **Background**: Teal/cyan rounded square (diamond-like when rotated)
-- **Color**: Pure white "t" letter
-- **Usage**: Welcome screen, app icons, favicon
+- **Description**: White lowercase "t" letter in teal/turquoise rounded square
+- **Background**: Vibrant teal-blue rounded square (diamond-like when rotated 45°)
+- **Color**: Pure white "t" letter with soft, calligraphic curves
+- **Style**: Clean, modern, minimalist, professional
+- **Usage**: Welcome screen, app icons, favicon, main branding
 - **Size**: 1024x1024px for app store requirements
+- **Design Notes**: 
+  - Vertical stem curves gently toward right at bottom
+  - Horizontal crossbar extends only to right of vertical stem
+  - Positioned slightly above midpoint of vertical stroke
+  - High contrast for visibility across platforms
 
 ## 🔧 **How to Replace Placeholder Files**
 

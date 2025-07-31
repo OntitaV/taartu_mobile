@@ -12,12 +12,18 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Primary Logo
-            Image.asset(
-              'assets/logos/logo_primary.png',
-              width: MediaQuery.of(context).size.width * 0.6,
-              height: MediaQuery.of(context).size.height * 0.2,
-              fit: BoxFit.contain,
+            // App Icon
+            Container(
+              width: MediaQuery.of(context).size.width * 0.3,
+              height: MediaQuery.of(context).size.width * 0.3,
+              decoration: BoxDecoration(
+                color: const Color(0xFF00CED1), // Teal background
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Image.asset(
+                'assets/logos/app_icon.png',
+                fit: BoxFit.contain,
+              ),
             ),
             const SizedBox(height: 40),
             // Loading indicator

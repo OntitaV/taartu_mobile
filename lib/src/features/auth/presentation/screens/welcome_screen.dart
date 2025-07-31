@@ -34,6 +34,10 @@ class WelcomeScreen extends StatelessWidget {
                         Container(
                           width: screenWidth * 0.15,
                           height: screenWidth * 0.15,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF00CED1), // Teal background
+                            borderRadius: BorderRadius.circular(screenWidth * 0.02),
+                          ),
                           child: Image.asset(
                             'assets/logos/app_icon.png',
                             fit: BoxFit.contain,
