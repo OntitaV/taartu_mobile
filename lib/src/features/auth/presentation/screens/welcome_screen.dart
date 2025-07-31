@@ -32,16 +32,11 @@ class WelcomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          width: screenWidth * 0.12,
-                          height: screenWidth * 0.12,
-                          decoration: BoxDecoration(
-                            color: AppTheme.primary,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Icon(
-                            Icons.cut,
-                            size: screenWidth * 0.06,
-                            color: Colors.white,
+                          width: screenWidth * 0.15,
+                          height: screenWidth * 0.15,
+                          child: Image.asset(
+                            'assets/logos/app_icon.png',
+                            fit: BoxFit.contain,
                           ),
                         ),
                         SizedBox(height: screenHeight * 0.02),

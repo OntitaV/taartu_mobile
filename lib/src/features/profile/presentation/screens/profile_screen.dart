@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taartu_mobile/src/core/theme/app_theme.dart';
 import 'package:taartu_mobile/src/shared/widgets/taartu_button.dart';
+import 'package:taartu_mobile/src/shared/widgets/taartu_app_bar.dart';
 import 'package:taartu_mobile/src/core/navigation/app_router.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -30,10 +31,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     
     return Scaffold(
       backgroundColor: AppTheme.gray50,
-      appBar: AppBar(
+      appBar: TaartuAppBar(
         title: const Text('Profile'),
-        backgroundColor: AppTheme.white,
-        elevation: 0,
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
