@@ -242,25 +242,30 @@ class _ScaffoldWithNavigationBarState extends State<ScaffoldWithNavigationBar> {
         ),
         child: SafeArea(
           bottom: true,
-          child: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            currentIndex: _currentIndex,
-            onTap: (index) {
-              if (index != _currentIndex) {
-                context.go(_items[index].route);
-              }
-            },
-            selectedItemColor: Colors.blue,
-            unselectedItemColor: Colors.grey,
-            selectedFontSize: 10,
-            unselectedFontSize: 8,
-            iconSize: 18,
-            items: _items.map((item) {
-              return BottomNavigationBarItem(
-                icon: Icon(item.icon),
-                label: item.label,
-              );
-            }).toList(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+            child: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: _currentIndex,
+              onTap: (index) {
+                if (index != _currentIndex) {
+                  context.go(_items[index].route);
+                }
+              },
+              selectedItemColor: Colors.blue,
+              unselectedItemColor: Colors.grey,
+              selectedFontSize: 9,
+              unselectedFontSize: 8,
+              iconSize: 16,
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              items: _items.map((item) {
+                return BottomNavigationBarItem(
+                  icon: Icon(item.icon),
+                  label: item.label,
+                );
+              }).toList(),
+            ),
           ),
         ),
       ),
