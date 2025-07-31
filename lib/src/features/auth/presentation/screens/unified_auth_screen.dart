@@ -57,7 +57,7 @@ class _UnifiedAuthScreenState extends State<UnifiedAuthScreen>
     return Scaffold(
       backgroundColor: AppTheme.gray50,
       appBar: TaartuAppBar(
-        title: widget.role == 'business' ? 'Business Account' : 'Client Account',
+        title: Text(widget.role == 'business' ? 'Business Account' : 'Client Account'),
         onBackPressed: () => context.go('/welcome'),
       ),
       body: Column(
