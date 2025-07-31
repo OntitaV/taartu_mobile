@@ -241,60 +241,57 @@ class _ScaffoldWithNavigationBarState extends State<ScaffoldWithNavigationBar> {
           ],
         ),
         child: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 1),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: _items.asMap().entries.map((entry) {
-                    final index = entry.key;
-                    final item = entry.value;
-                    final isSelected = index == _currentIndex;
+          bottom: true,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: _items.asMap().entries.map((entry) {
+                final index = entry.key;
+                final item = entry.value;
+                final isSelected = index == _currentIndex;
 
-                    return Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          if (!isSelected) {
-                            context.go(item.route);
-                          }
-                        },
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 1),
-                          decoration: BoxDecoration(
-                            color: isSelected ? Colors.blue.withValues(alpha: 0.1) : Colors.transparent,
-                            borderRadius: BorderRadius.circular(2),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(
-                                item.icon,
-                                color: isSelected ? Colors.blue : Colors.grey,
-                                size: constraints.maxWidth > 400 ? 18 : 16,
-                              ),
-                              const SizedBox(height: 1),
-                              Text(
-                                item.label,
-                                style: TextStyle(
-                                  color: isSelected ? Colors.blue : Colors.grey,
-                                  fontSize: constraints.maxWidth > 400 ? 9 : 7,
-                                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                                ),
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                              ),
-                            ],
-                          ),
-                        ),
+                return Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      if (!isSelected) {
+                        context.go(item.route);
+                      }
+                    },
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                      decoration: BoxDecoration(
+                        color: isSelected ? Colors.blue.withValues(alpha: 0.1) : Colors.transparent,
+                        borderRadius: BorderRadius.circular(1),
                       ),
-                    );
-                  }).toList(),
-                ),
-              );
-            },
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            item.icon,
+                            color: isSelected ? Colors.blue : Colors.grey,
+                            size: 14,
+                          ),
+                          const SizedBox(height: 0),
+                          Text(
+                            item.label,
+                            style: TextStyle(
+                              color: isSelected ? Colors.blue : Colors.grey,
+                              fontSize: 6,
+                              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                            ),
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
           ),
         ),
       ),
